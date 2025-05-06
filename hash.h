@@ -34,7 +34,7 @@ struct MyStringHash {
         }
         // Translate substrings of 6 letters
         HASH_INDEX_T w[5]; // Array of the converted numbers (base36 -> decimal)
-        for(int i=0; i<6; i++){
+        for(int i=0; i<5; i++){
           HASH_INDEX_T res;
           res = base36[i*6];
           for(int j=1; j<6; j++){
@@ -44,9 +44,9 @@ struct MyStringHash {
           w[i] = res;
         }
         // Final hash result
-        HASH_INDEX_T finalHash;
+        HASH_INDEX_T finalHash = 0;
         for(int i=0; i<5; i++){
-          //std::cout << w[i] << std::endl;
+          std::cout << rValues[i] << " " << w[i] << std::endl;
           finalHash+=(rValues[i]*w[i]);
         }
         return finalHash;
