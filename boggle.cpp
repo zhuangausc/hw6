@@ -94,6 +94,36 @@ std::set<std::string> boggle(const std::set<std::string>& dict, const std::set<s
 bool boggleHelper(const std::set<std::string>& dict, const std::set<std::string>& prefix, const std::vector<std::vector<char> >& board, 
 								   std::string word, std::set<std::string>& result, unsigned int r, unsigned int c, int dr, int dc)
 {
-//add your solution here!
+	//add your solution here!
 
+	/*// If finished state and valid
+	if(prefix cannot be added to || r==board.size()){
+		result.append(prefix)
+		return true;
+	}*/
+
+  if(r>=board.size() || c>=board.size()){
+    return false;
+  }
+  // Apply choice to state
+	word+=board[r][c]; // Update current word
+  
+  // If choice is valid -- Check if current updated word is a prefix
+  if(prefix.find(word)!=prefix.end()){
+        // Recursive call with current state
+        if(boggleHelper(dict, prefix, board, word, result, r+dr, c+dc, dr, dc)){
+          return true;
+        }
+        // Remove choice (backtrack)
+        // Done
+  }
+
+  // If finished state and valid
+  // Check if current updated word is in the dictionary
+  if(dict.find(word)!=dict.end()){
+    result.insert(word);
+    return true;
+  }
+	// Return false (no viable solution found)
+	return false;
 }
