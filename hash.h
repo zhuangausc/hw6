@@ -21,6 +21,11 @@ struct MyStringHash {
     HASH_INDEX_T operator()(const std::string& k) const
     {
         // Add your code here
+        // The following hashfunc_tests failed:
+        //HashFunc.ExampleTwo
+        //HashFunc.LargestInputString
+        //HashFunc.String1
+        //HashFunc.StringCase
         HASH_INDEX_T base36[30] = {0}; // Array of the 26 letters, set all values to 0
         // NOTE: it is 30 letters to allow for an equal number of batches of 6 numbers
         for(int i=0; i<k.length(); i++){ // Convert all letters to base36
@@ -57,7 +62,7 @@ struct MyStringHash {
           HASH_INDEX_T res = letter-97; // Convert to base 36
           return res;
         } else { // letter is a number
-          HASH_INDEX_T res = letter-48; // Convert to base 36
+          HASH_INDEX_T res = letter-48+26; // Convert to base 36
           return res;
         }
     }
